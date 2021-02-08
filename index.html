@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>愿财神眷顾你</title>
+    <style>
+        .blue {
+            color: blue;
+        }
+        .red {
+            color: red;
+        }
+        span {
+            margin: 5px 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3>roll it</h3>
+    <div>
+        <fieldset>
+            <legend>随机系数(10-1000)</legend>
+            <input type="number" required title="10-1000" />
+        </fieldset>
+        <input type="submit" value="roll">
+    </div>
+    <div id="result" style="white-space: pre-line;"></div>
+    <script>
+        module = {}
+    </script>
+    <script src="./index.js"></script>
+    <script>
+        var res = document.querySelector('#result')
+        var radio = document.querySelector('input[type="number"]')
+        var submit = document.querySelector('input[type="submit"]')
+
+        submit.addEventListener('click', (e) => {
+            e.preventDefault();
+            var val = radio.value
+            if (/^(?:[1-9]\d\d?|1000)$/.test(val)){
+                var radioNumber = Number(radio.value)
+                var result = module.exports(radioNumber)
+                var frag = document.createDocumentFragment()
+                result.forEach((element, index) => {
+                    const span = document.createElement('span')
+                    span.className = index === 6 ? 'blue' : 'red'
+                    span.innerHTML = element
+                    frag.appendChild(span)
+                });
+                res.appendChild(frag)
+                res.appendChild(document.createTextNode('\n'))
+            }
+            else {
+                alert('非法输入')
+            }
+        }, false)
+    </script>
+</body>
+</html>
